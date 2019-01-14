@@ -128,7 +128,10 @@ export function firestoreRef(firebase, meta) {
   } = meta;
   let ref = firebase.firestore().collection(collection);
   // TODO: Compare other ways of building ref
-  if (doc) ref = ref.doc(doc);
+  if (doc) {
+    if (typeof doc === string) ref = ref.doc(doc);
+    else ref = ref.doc(doc.id);
+  }
   ref = handleSubcollections(ref, subcollections);
   if (where) ref = addWhereToRef(ref, where);
   if (orderBy) ref = addOrderByToRef(ref, orderBy);
@@ -411,7 +414,7 @@ export function dataByIdSnapshot(snap) {
  * @private
  * @description Create an array of promises for population of an object or list
  * @param {Object} firebase - Internal firebase object
- * @param {Object} populate - Object containing root to be populate
+ * @param {Object} - Object containing root to be populate
  * @param {Object} populate.root - Firebase root path from which to load populate item
  * @param {String} id - String id
  */
