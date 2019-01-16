@@ -1,6 +1,6 @@
 {
-  "name": "redux-firestore",
-  "version": "0.6.2",
+  "name": "redux-firestore-2",
+  "version": "0.6.2-working-referance",
   "description": "Redux bindings for Firestore.",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -88,7 +88,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/prescottprue/redux-firestore.git"
+    "url": "git+https://github.com/aviyam1811/redux-firestore.git"
   },
   "npmFileMap": [
     {

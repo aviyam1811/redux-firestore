@@ -115,6 +115,7 @@ export function firestoreRef(firebase, meta) {
     throw new Error('Firestore must be required and initalized.');
   }
   const {
+    docRef,
     collection,
     doc,
     subcollections,
@@ -126,11 +127,14 @@ export function firestoreRef(firebase, meta) {
     endAt,
     endBefore,
   } = meta;
-  let ref = firebase.firestore().collection(collection);
-  // TODO: Compare other ways of building ref
-  if (doc) {
-    if (typeof doc === string) ref = ref.doc(doc);
-    else ref = ref.doc(doc.id);
+  let ref;
+  if(collection) {
+    ref = firebase.firestore().collection(collection);
+    // TODO: Compare other ways of building ref
+    if (doc) ref.doc(doc);
+  }
+  else {
+    ref = firebase.firestore().doc(docRef.toString());
   }
   ref = handleSubcollections(ref, subcollections);
   if (where) ref = addWhereToRef(ref, where);
